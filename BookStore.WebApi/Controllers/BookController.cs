@@ -1,3 +1,4 @@
+using AutoMapper;
 using BookStore.WebApi.BookContext;
 using BookStore.WebApi.BookOperation.Commands.AddBookCommands;
 using BookStore.WebApi.BookOperation.Commands.DeleteBookCommands;
@@ -13,16 +14,17 @@ namespace BookStore.WebApi.Controllers;
 [Route("api/[controller]s")]
 public class BookController : ControllerBase
 {
-    
+    private readonly IMapper _mapper;
     private readonly BookDBContext _context;
-    public BookController(BookDBContext context)
+    public BookController(BookDBContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
     [HttpGet]
     public async Task<IActionResult> GetBooksAsync()
     {
-        GetBooksQuery getBooks = new GetBooksQuery(_context);
+        GetBooksQuery getBooks = new GetBooksQuery(_context,_mapper);
         var books = await getBooks.handleAsync();
         return Ok(books);
     }
@@ -37,14 +39,14 @@ public class BookController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddBookAsync([FromBody] AddBookVM model)
     {
-        AddBookCommand add = new AddBookCommand(_context);
+        AddBookCommand add = new AddBookCommand(_context,_mapper);
         await  add.handleAsync(model);
         return Ok();
     }
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateBookAsync([FromRoute] int id,[FromBody] UpdateBookVM model)
     {
-        UpdateBookCommand update = new UpdateBookCommand(_context);
+        UpdateBookCommand update = new UpdateBookCommand(_context,_mapper);
         await update.handleAsync(model,id);
         return Ok();
 

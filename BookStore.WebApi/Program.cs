@@ -8,12 +8,11 @@ using BookStore.WebApi.Common.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Validation filter
 builder.Services.AddControllers(options => options.Filters.Add<ValidationFilters>())
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<AddBookValidator>())
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
-
+builder.Services.AddControllers();
 builder.Services.AddDbContext<BookDBContext>(options => options.UseInMemoryDatabase(databaseName:"BookStoreDB"));
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
 
@@ -37,5 +36,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseException();
 app.Run();

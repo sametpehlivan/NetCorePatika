@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -8,9 +9,8 @@ public class ValidationFilters : IAsyncActionFilter
     {
         if(! context.ModelState.IsValid)
         {
-            var errors = context.ModelState.Where(x => x.Value.Errors.Any()).ToDictionary(e => e.Key, e => e.Value.Errors.Select(e => e.ErrorMessage)).ToArray();
-            context.Result = new BadRequestObjectResult(errors);
-            return;
+            var errors = context.ModelState.Where(x => x.Value.Errors.Any()).ToDictionary(e => e.Key, e => e.Value.Errors.Select(e => e.ErrorMessage)).ToList();
+            throw new Exception(JsonSerializer.Serialize(errors)); 
         }
         await next();
     }

@@ -12,9 +12,15 @@ public class DeleteBookCommand
     }
     public async Task handleAsync(int id)
     {
-        var book = await  _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+         var book = await _context.Books.AsQueryable()
+                                       .Include(b => b.Author)
+                                       .Include(b => b.BookGenres)
+                                       .ThenInclude(bg => bg.Genre)
+                                       .FirstOrDefaultAsync(i => i.Id == id);
         if(book == null) throw new  Exception("Not found book");
-         _context.Books.Entry(book).State =  EntityState.Deleted;
+       
+        _context.Books.Remove(book);
+        
         await _context.SaveChangesAsync();
     }
 }

@@ -4,13 +4,13 @@ using BookStore.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 using BookStore.WebApi.Filters;
 using FluentValidation.AspNetCore;
-using BookStore.WebApi.Common.Validators;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Validation filter
 builder.Services.AddControllers(options => options.Filters.Add<ValidationFilters>())
-    .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<AddBookValidator>())
+    .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<Program>())
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<BookDBContext>(options => options.UseInMemoryDatabase(databaseName:"BookStoreDB"));

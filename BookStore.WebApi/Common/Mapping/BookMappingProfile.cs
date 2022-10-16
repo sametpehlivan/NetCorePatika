@@ -4,6 +4,7 @@ using BookStore.WebApi.BookOperation.Commands.UpdateBookCommands;
 using BookStore.WebApi.BookOperation.Queries.GetBookQueries;
 using BookStore.WebApi.BookOperation.Queries.GetBooksQueries;
 using BookStore.WebApi.Common.Enums;
+using BookStore.WebApi.Entities;
 
 namespace BookStore.WebApi.Common.Mapping;
 
@@ -13,15 +14,14 @@ public class BookMappingProfile : Profile
     {
         
         //for GetBooksQuery
-        CreateMap<GetBooksVM,Book>()
-            .ForMember(b => b.GenreId, gb => gb.MapFrom(gb =>  (int)(Enum.Parse<GenreEnum>(gb.Genre))));
+        
         CreateMap<Book,GetBooksVM>()
-            .ForMember(gb => gb.Genre, b => b.MapFrom(b => ((GenreEnum)b.GenreId).ToString()));
+            .ForMember(gb => gb.AuthorName,b => b.MapFrom(b => (b.Author.FirstName + " " +b.Author.LastName )))
+            .ForMember(gb => gb.Genres,b => b.MapFrom(b => b.BookGenres.Select(ab => ab.Genre.Name).ToList() ));
         //for GetBookQuery
-        CreateMap<GetBookVM,Book>()
-            .ForMember(b => b.GenreId, gb => gb.MapFrom(gb =>  (int)(Enum.Parse<GenreEnum>(gb.Genre))));
         CreateMap<Book,GetBookVM>()
-            .ForMember(gb => gb.Genre, b => b.MapFrom(b => ((GenreEnum)b.GenreId).ToString()));
+            .ForMember(gb => gb.AuthorName,b => b.MapFrom(b => (b.Author.FirstName + " " +b.Author.LastName )))
+            .ForMember(gb => gb.Genres,b => b.MapFrom(b => b.BookGenres.Select(ab =>  ab.Genre.Name).ToList() ));
         //for AddBookCommand
         CreateMap<AddBookVM,Book>();
         CreateMap<Book,AddBookVM>();

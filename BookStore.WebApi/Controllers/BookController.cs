@@ -32,7 +32,7 @@ public class BookController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetBookAsync(int id)
     {
-        GetBookQuery getBook = new  GetBookQuery(_context);
+        GetBookQuery getBook = new  GetBookQuery(_context,_mapper);
         var book = await  getBook.handleAsync(id);
         return  Ok(book);
     }

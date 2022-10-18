@@ -1,10 +1,10 @@
 using AutoMapper;
 using BookStore.WebApi.BookContext;
-using BookStore.WebApi.BookOperation.Commands.AddBookCommands;
-using BookStore.WebApi.BookOperation.Commands.DeleteBookCommands;
-using BookStore.WebApi.BookOperation.Commands.UpdateBookCommands;
-using BookStore.WebApi.BookOperation.Queries.GetBookQueries;
-using BookStore.WebApi.BookOperation.Queries.GetBooksQueries;
+using BookStore.WebApi.Application.BookOperation.Commands.AddBookCommands;
+using BookStore.WebApi.Application.BookOperation.Commands.DeleteBookCommands;
+using BookStore.WebApi.Application.BookOperation.Commands.UpdateBookCommands;
+using BookStore.WebApi.Application.BookOperation.Queries.GetBookQueries;
+using BookStore.WebApi.Application.BookOperation.Queries.GetBooksQueries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,8 +15,8 @@ namespace BookStore.WebApi.Controllers;
 public class BookController : ControllerBase
 {
     private readonly IMapper _mapper;
-    private readonly BookDBContext _context;
-    public BookController(BookDBContext context, IMapper mapper)
+    private readonly IBookDBContext _context;
+    public BookController(IBookDBContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

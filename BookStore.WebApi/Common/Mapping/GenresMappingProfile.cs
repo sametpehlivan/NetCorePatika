@@ -1,9 +1,9 @@
 using AutoMapper;
 using BookStore.WebApi.Entities;
-using BookStore.WebApi.GenreOperation.Commands.AddGenreCommands;
-using BookStore.WebApi.GenreOperation.Commands.UpdateGenreCommands;
-using BookStore.WebApi.GenreOperation.GetGenreQueries;
-using BookStore.WebApi.GenreOperation.GetGenresQueries;
+using BookStore.WebApi.Application.GenreOperation.Commands.AddGenreCommands;
+using BookStore.WebApi.Application.GenreOperation.Commands.UpdateGenreCommands;
+using BookStore.WebApi.Application.GenreOperation.GetGenreQueries;
+using BookStore.WebApi.Application.GenreOperation.GetGenresQueries;
 
 namespace BookStore.WebApi.Common.Mapping;
 

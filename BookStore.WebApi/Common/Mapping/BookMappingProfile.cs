@@ -1,9 +1,8 @@
 using AutoMapper;
-using BookStore.WebApi.BookOperation.Commands.AddBookCommands;
-using BookStore.WebApi.BookOperation.Commands.UpdateBookCommands;
-using BookStore.WebApi.BookOperation.Queries.GetBookQueries;
-using BookStore.WebApi.BookOperation.Queries.GetBooksQueries;
-using BookStore.WebApi.Common.Enums;
+using BookStore.WebApi.Application.BookOperation.Commands.AddBookCommands;
+using BookStore.WebApi.Application.BookOperation.Commands.UpdateBookCommands;
+using BookStore.WebApi.Application.BookOperation.Queries.GetBookQueries;
+using BookStore.WebApi.Application.BookOperation.Queries.GetBooksQueries;
 using BookStore.WebApi.Entities;
 
 namespace BookStore.WebApi.Common.Mapping;

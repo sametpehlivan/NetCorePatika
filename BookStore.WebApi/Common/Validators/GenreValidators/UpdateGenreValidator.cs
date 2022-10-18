@@ -1,5 +1,5 @@
 
-using BookStore.WebApi.GenreOperation.Commands.UpdateGenreCommands;
+using BookStore.WebApi.Application.GenreOperation.Commands.UpdateGenreCommands;
 using FluentValidation;
 
 namespace BookStore.WebApi.Common.Validators.GenreValidator;

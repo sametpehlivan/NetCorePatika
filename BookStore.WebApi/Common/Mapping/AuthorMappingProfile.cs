@@ -1,8 +1,8 @@
 
 using AutoMapper;
-using BookStore.WebApi.AuthorOperation.Commands.AddAuthorCommands;
-using BookStore.WebApi.AuthorOperation.Queries.GetAuthorQueries;
-using BookStore.WebApi.AuthorOperation.Queries.GetAuthorsQueries;
+using BookStore.WebApi.Application.AuthorOperation.Commands.AddAuthorCommands;
+using BookStore.WebApi.Application.AuthorOperation.Queries.GetAuthorQueries;
+using BookStore.WebApi.Application.AuthorOperation.Queries.GetAuthorsQueries;
 using BookStore.WebApi.Entities;
 
 namespace BookStore.WebApi.Common.Mapping;

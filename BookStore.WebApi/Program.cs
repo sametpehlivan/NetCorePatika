@@ -12,9 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options => options.Filters.Add<ValidationFilters>())
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<Program>())
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
-builder.Services.AddControllers();
 builder.Services.AddDbContext<BookDBContext>(options => options.UseInMemoryDatabase(databaseName:"BookStoreDB"));
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
+builder.Services.AddScoped<IBookDBContext,BookDBContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

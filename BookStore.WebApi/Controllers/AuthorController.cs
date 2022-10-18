@@ -1,8 +1,8 @@
 using AutoMapper;
-using BookStore.WebApi.AuthorOperation.Commands.AddAuthorCommands;
-using BookStore.WebApi.AuthorOperation.Commands.UpdateAuthorCommands;
-using BookStore.WebApi.AuthorOperation.Queries.GetAuthorQueries;
-using BookStore.WebApi.AuthorOperation.Queries.GetAuthorsQueries;
+using BookStore.WebApi.Application.AuthorOperation.Commands.AddAuthorCommands;
+using BookStore.WebApi.Application.AuthorOperation.Commands.UpdateAuthorCommands;
+using BookStore.WebApi.Application.AuthorOperation.Queries.GetAuthorQueries;
+using BookStore.WebApi.Application.AuthorOperation.Queries.GetAuthorsQueries;
 using BookStore.WebApi.BookContext;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,8 +13,8 @@ namespace BookStore.WebApi.Controllers;
 public class AuthorController : ControllerBase
 {
     private readonly IMapper _mapper;
-    private readonly BookDBContext _context;
-    public AuthorController(BookDBContext context, IMapper mapper)
+    private readonly IBookDBContext _context;
+    public AuthorController(IBookDBContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

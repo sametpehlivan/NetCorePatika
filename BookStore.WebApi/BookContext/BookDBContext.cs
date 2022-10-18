@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using BookStore.WebApi.Entities;
+
 namespace BookStore.WebApi.BookContext;
-public class BookDBContext : DbContext
+public class BookDBContext :DbContext, IBookDBContext
 {
     public DbSet<Book> Books {get; set;}
     public DbSet<Author> Authors {get; set;}
@@ -10,6 +11,7 @@ public class BookDBContext : DbContext
 
     public BookDBContext(DbContextOptions<BookDBContext> options):base(options)
     {}
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -36,5 +38,8 @@ public class BookDBContext : DbContext
         
     }
 
-
+    public override async Task<int> SaveChangesAsync(CancellationToken token = default)
+    {
+       return await base.SaveChangesAsync(token);
+    }
 }
